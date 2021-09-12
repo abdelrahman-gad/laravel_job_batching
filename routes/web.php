@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use  Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +13,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\SalesController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/upload',[SalesController::class,'index']);
+
+
+Route::post('/upload',[SalesController::class,'store'])->name('upload');
