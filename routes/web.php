@@ -23,4 +23,6 @@ Route::get('/', function () {
 Route::get('/upload',[SalesController::class,'index']);
 
 
-Route::post('/upload',[SalesController::class,'store'])->name('upload');
+Route::post('/upload',[SalesController::class,'upload'])->name('upload');
+
+Route::get('/store-data',[SalesController::class,'store'])->name('store');
