@@ -25,4 +25,4 @@ Route::get('/upload',[SalesController::class,'index']);
 
 Route::post('/upload',[SalesController::class,'upload'])->name('upload');
 
-Route::get('/store-data',[SalesController::class,'store'])->name('store');
+Route::get('/batch ',[SalesController::class,'batch'])->name('batch');

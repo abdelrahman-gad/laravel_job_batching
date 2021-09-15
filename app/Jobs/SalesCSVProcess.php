@@ -2,16 +2,17 @@
 
 namespace App\Jobs;
 
+use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-
-class SaleCSVProcess implements ShouldQueue
+use App\Models\Sale;
+class SalesCSVProcess implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Batchable,  Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $data;
     public $header;
@@ -22,6 +23,8 @@ class SaleCSVProcess implements ShouldQueue
      */
     public function __construct($data,$header)
     {
+     
+        \Log::info('This is some useful information.');
         $this->data=$data;
         $this->header=$header;
     }
@@ -33,10 +36,12 @@ class SaleCSVProcess implements ShouldQueue
      */
     public function handle()
     {
-       
+      
           foreach($this->data as $sale){
               $saleData = array_combine($this->header,$sale);
               Sale::create($saleData);
           }
-    }       
+    }     
+    
+  
 }
