@@ -13,16 +13,15 @@ use  Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+
 use App\Http\Controllers\SalesController;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/exportexcel',[SalesController::class,'exportToExcel']);
 
-Route::get('/upload',[SalesController::class,'index']);
-
-
-Route::post('/upload',[SalesController::class,'upload'])->name('upload');
-
-Route::get('/batch ',[SalesController::class,'batch'])->name('batch');

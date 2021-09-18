@@ -3,7 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SalesCsvProcess;
 use Illuminate\Support\Facades\Bus;
-
+use App\Exports\SalesExport;
+use Maatwebsite\Excel\Facades\Excel;
 class SalesController extends Controller
 {
     public function index()
@@ -39,12 +40,12 @@ class SalesController extends Controller
 
                 $batch->add(new SalesCsvProcess($data,$header));
 
+                // SalesCsvProcess::dispatch($data, $header);
                 unlink($file);
             }
 
-            return 'stored';
+            return $batch;
 
-            return 'Done';
         }
            
         
@@ -54,5 +55,10 @@ class SalesController extends Controller
     public function batch(){
         $batchId = request('id');
         return Bus::findBatch($batchId);
+    }
+
+    public function  exportToExcel(){
+        // return 'test';
+        return Excel::download(new SalesExport, 'sales.xlsx');
     }
 }
