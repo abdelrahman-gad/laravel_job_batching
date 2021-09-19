@@ -59,6 +59,7 @@ class SalesController extends Controller
 
     public function  exportToExcel(){
         // return 'test';
+        
         return Excel::download(new SalesExport, 'sales.xlsx');
     }
 }
